@@ -29,13 +29,17 @@ const createTableUI = (users) => {
 // TODO: Lytt til tastatur klikk på søkefeltet, den skal trigge søkefunksjonen (handleSearch)
 // TODO: Lytt til klikk på filter-knappen, den skal trigge filterfunksjonen (handleFilter)
 
+//BEGGE
+
+let usersFiltered = users;
+
 //SØK (den er case sensitiv)
 const inputSearch = document.getElementById("name");
 
 inputSearch.addEventListener("keyup", handleSearch);
 
 function handleSearch() {
-    const usersFiltered = users.filter(users => users.name.includes(inputSearch.value));
+    usersFiltered = users.filter(users => users.name.includes(inputSearch.value) && users.age > minimumAge.value);
     createTableUI(usersFiltered);
 }
 
@@ -46,7 +50,7 @@ const minimumAge = document.getElementById("age");
 filterBtn.addEventListener("click", handleFilter);
 
 function handleFilter() {
-    const usersFiltered = users.filter(users => users.age > minimumAge.value);
+    usersFiltered = users.filter(users => users.age > minimumAge.value && users.name.includes(inputSearch.value));
     createTableUI(usersFiltered);
 }
 
